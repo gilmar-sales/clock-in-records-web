@@ -5,7 +5,8 @@ const drawerWidth = 90;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: '100vh',
+    height: '100%',
+    minHeight: '100vh',
   },
   rootMobile: {
     display: 'flex',
