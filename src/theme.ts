@@ -10,6 +10,7 @@ const theme = createMuiTheme({
     fontFamily: 'Montserrat',
     button: {
       fontWeight: 600,
+      textTransform: 'capitalize',
     },
     h1: {
       fontWeight: 700,
