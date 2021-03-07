@@ -28,10 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    marginLeft: drawerWidth,
-  },
-  contentMobile: {
-    flexGrow: 1,
   },
   logo: {
     padding: theme.spacing(2),

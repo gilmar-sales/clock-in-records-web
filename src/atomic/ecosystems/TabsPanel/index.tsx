@@ -4,7 +4,6 @@ import {
   BottomNavigationAction,
   Button,
   Divider,
-  Drawer,
   Tab,
   Tabs,
   useMediaQuery,
@@ -38,7 +37,7 @@ const TabsPanel: React.FC = (props) => {
   if (renderMobile)
     return (
       <div className={classes.rootMobile}>
-        <div className={classes.contentMobile}>{props.children}</div>
+        <div className={classes.content}>{props.children}</div>
         <BottomNavigation
           value={active}
           onChange={(event, newValue) => {
@@ -61,43 +60,41 @@ const TabsPanel: React.FC = (props) => {
 
   return (
     <div className={classes.root}>
-      <Drawer variant="permanent">
-        <div className={classes.panel}>
-          <div className={classes.menu}>
-            <div className={classes.logo}>
-              <LogoIcon width={48} height={48} color="#39E991" />
-            </div>
-            <Tabs
-              orientation="vertical"
-              value={active}
-              onChange={(event, newValue) => {
-                setActive(newValue);
-              }}
-            >
-              <Divider variant="fullWidth" />
-              <Tab
-                icon={<DashboardOutlined />}
-                label={'Dashboard'}
-                value={0}
-                {...a11yProps(0)}
-                className={active === 0 ? classes.tabActive : ''}
-              />
-              <Divider variant="fullWidth" />
-              <Tab
-                icon={<AssignmentOutlined />}
-                label={'Meus Registros'}
-                wrapped
-                value={1}
-                {...a11yProps(1)}
-                className={active === 1 ? classes.tabActive : ''}
-              />
-            </Tabs>
+      <div className={classes.panel}>
+        <div className={classes.menu}>
+          <div className={classes.logo}>
+            <LogoIcon width={48} height={48} color="#39E991" />
           </div>
-          <Button className={classes.button}>
-            <ExitToApp />
-          </Button>
+          <Tabs
+            orientation="vertical"
+            value={active}
+            onChange={(event, newValue) => {
+              setActive(newValue);
+            }}
+          >
+            <Divider variant="fullWidth" />
+            <Tab
+              icon={<DashboardOutlined />}
+              label={'Dashboard'}
+              value={0}
+              {...a11yProps(0)}
+              className={active === 0 ? classes.tabActive : ''}
+            />
+            <Divider variant="fullWidth" />
+            <Tab
+              icon={<AssignmentOutlined />}
+              label={'Meus Registros'}
+              wrapped
+              value={1}
+              {...a11yProps(1)}
+              className={active === 1 ? classes.tabActive : ''}
+            />
+          </Tabs>
         </div>
-      </Drawer>
+        <Button className={classes.button}>
+          <ExitToApp />
+        </Button>
+      </div>
       <div className={classes.content}>{props.children}</div>
     </div>
   );
