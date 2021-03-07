@@ -72,7 +72,7 @@ const TabsPanel: React.FC = (props) => {
               setActive(newValue);
             }}
           >
-            <Divider variant="fullWidth" />
+            <Divider variant="fullWidth" className={classes.divider} />
             <Tab
               icon={<DashboardOutlined />}
               label={'Dashboard'}
@@ -80,7 +80,7 @@ const TabsPanel: React.FC = (props) => {
               {...a11yProps(0)}
               className={active === 0 ? classes.tabActive : ''}
             />
-            <Divider variant="fullWidth" />
+            <Divider variant="fullWidth" className={classes.divider} />
             <Tab
               icon={<AssignmentOutlined />}
               label={'Meus Registros'}

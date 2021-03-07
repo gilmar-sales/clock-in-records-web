@@ -4,12 +4,10 @@ const drawerWidth = 90;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
     display: 'flex',
     height: '100vh',
   },
   rootMobile: {
-    flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
@@ -18,19 +16,21 @@ const useStyles = makeStyles((theme) => ({
     borderTop: `1px solid ${theme.palette.divider}`,
   },
   panel: {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: theme.palette.background.paper,
     overflow: 'hidden',
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
   content: {
     flexGrow: 1,
   },
   logo: {
     padding: theme.spacing(2),
+  },
+  divider: {
+    margin: theme.spacing(1, 0, 1),
   },
   menu: {
     display: 'flex',
