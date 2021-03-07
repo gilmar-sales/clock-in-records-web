@@ -1,10 +1,13 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
+
+import Routes from './Routes';
 
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <Box>
+      <Routes />
+    </Box>
   );
 }
 
