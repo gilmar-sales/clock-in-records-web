@@ -3,20 +3,19 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   container: {
     height: '100%',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: theme.spacing(2),
-  },
-  title: {
-    fontFamily: 'Nunito',
-    fontSize: '2rem',
-  },
-  body: {
     width: '100%',
-    borderSpacing: theme.spacing(1, 3),
+    padding: theme.spacing(1),
+    overflow: 'auto',
+    fontFamily: 'Nunito',
+  },
+  table: {
     borderCollapse: 'separate',
+    borderSpacing: '0 20px',
+  },
+  headCell: {
+    fontSize: '2rem',
+    fontFamily: 'Nunito',
+    border: 0,
   },
 }));
 

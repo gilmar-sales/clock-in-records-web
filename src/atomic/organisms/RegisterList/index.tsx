@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Container } from '@material-ui/core';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 
 import RegisterItem from '../../molecules/RegisterItem';
 
@@ -15,18 +22,24 @@ const RegisterList: React.FC = (props) => {
   ];
 
   return (
-    <Container className={classes.container}>
-      <Box className={classes.header}>
-        <div className={classes.title}>Collaborator</div>
-        <div className={classes.title}>Date</div>
-        <div className={classes.title}>Hour</div>
-      </Box>
-      <Box className={classes.body}>
-        {registers.map((register, index) => (
-          <RegisterItem key={index} register={register} />
-        ))}
-      </Box>
-    </Container>
+    <TableContainer className={classes.container}>
+      <Table className={classes.table} size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell className={classes.headCell}>Collaborator</TableCell>
+
+            <TableCell className={classes.headCell}>Date</TableCell>
+
+            <TableCell className={classes.headCell}>Hour</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {registers.map((register, index) => (
+            <RegisterItem key={index} register={register} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

@@ -1,26 +1,52 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: '1rem',
-    boxShadow: theme.shadows[2],
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-  },
   decoration: {
-    width: 5,
-    height: 35,
-    backgroundColor: theme.palette.primary.main,
-    marginRight: theme.spacing(6),
+    width: 4,
+    height: 28,
+    backgroundColor: '#6FCF97',
+    borderRadius: '1rem',
+    marginRight: theme.spacing(8),
+  },
+  bodyRow: {
+    boxShadow: theme.shadows[2],
     borderRadius: '1rem',
   },
-  cell: {
-    display: 'flex',
-    alignItems: 'center',
+  firstCell: {
+    fontFamily: 'Nunito',
+    borderRadius: '1rem 0 0 1rem',
+    border: 0,
+    backgroundColor: 'white',
+    padding: theme.spacing(0, 2),
+  },
+  bodyCell: {
+    fontSize: '1.5rem',
+    fontFamily: 'Nunito',
+    border: 0,
+    backgroundColor: 'white',
+  },
+  lastCell: {
+    fontSize: '1.5rem',
+    fontFamily: 'Nunito',
+    border: 0,
+    borderRadius: '0 1rem 1rem 0',
+    backgroundColor: 'white',
+  },
+  name: {
+    fontSize: '1.5rem',
+    lineHeight: '1.5rem',
+  },
+  number: {
+    fontSize: '1rem',
+  },
+  date: {
+    fontSize: '1.6rem',
+    color: '#888888',
+  },
+  hour: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    color: '#888888',
   },
 }));
 
