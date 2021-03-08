@@ -2,9 +2,8 @@ import { createMuiTheme } from '@material-ui/core';
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
     primary: { main: '#39E991', contrastText: 'white' },
-    secondary: { main: '#219653' },
+    secondary: { main: '#219653', contrastText: 'white' },
   },
   typography: {
     fontFamily: 'Montserrat',
@@ -19,6 +18,15 @@ const theme = createMuiTheme({
       fontWeight: 700,
     },
     h3: {
+      fontWeight: 700,
+    },
+    h4: {
+      fontWeight: 700,
+    },
+    h5: {
+      fontWeight: 700,
+    },
+    h6: {
       fontWeight: 700,
     },
   },
