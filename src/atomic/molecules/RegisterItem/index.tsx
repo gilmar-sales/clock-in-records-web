@@ -8,7 +8,7 @@ interface RegisterItemProps {
   register: Register;
 }
 
-const RegisterItem: React.FC<RegisterItemProps> = ({ register, ...props }) => {
+const RegisterItem: React.FC<RegisterItemProps> = ({ register }) => {
   const classes = useStyles();
 
   return (
