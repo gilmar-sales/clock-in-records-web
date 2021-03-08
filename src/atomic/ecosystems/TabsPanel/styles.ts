@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: '100%',
-    minHeight: '100vh',
+    height: '100vh',
   },
   rootMobile: {
     display: 'flex',
@@ -17,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: theme.palette.background.paper,
-    overflow: 'hidden',
     borderRight: `1px solid ${theme.palette.divider}`,
   },
   panelMobile: {
@@ -25,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: theme.palette.background.paper,
-    overflow: 'hidden',
     borderTop: `1px solid ${theme.palette.divider}`,
   },
   content: {
     flexGrow: 1,
+    overflow: 'auto',
   },
   logo: {
     padding: theme.spacing(0.8),

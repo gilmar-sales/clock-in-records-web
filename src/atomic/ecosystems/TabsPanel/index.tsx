@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Divider, Tab, Tabs, useMediaQuery } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import {
+  Button,
+  Divider,
+  Tab,
+  Tabs,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 
 import {
   AssignmentOutlined,
@@ -30,9 +36,22 @@ const TabsPanel: React.FC = (props) => {
       <div className={renderMobile ? classes.panelMobile : classes.panel}>
         <div className={renderMobile ? classes.menuMobile : classes.menu}>
           <div className={classes.logo}>
-            <LogoIcon width={48} height={48} color="#39E991" />
+            <LogoIcon
+              width={48}
+              height={48}
+              color={theme.palette.primary.main}
+            />
           </div>
           <Tabs
+            TabIndicatorProps={{
+              style: renderMobile
+                ? {
+                    height: 4,
+                  }
+                : {
+                    width: 4,
+                  },
+            }}
             value={active}
             onChange={(event, newValue) => {
               setActive(newValue);
