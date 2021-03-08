@@ -2,18 +2,35 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '100%',
+    minHeight: '100vh',
+    backgroundColor: theme.palette.text.primary,
   },
-  content: {
+  logo: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: theme.spacing(2),
     userSelect: 'none',
+    color: theme.palette.primary.contrastText,
   },
-  form: {
-    width: '100%', // Fix IE 11 issue.
+  content: {
+    display: 'flex',
+    height: '90vh',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: theme.spacing(6),
+    userSelect: 'none',
+    backgroundImage: `url(shape.svg)`,
+    backgroundPosition: 'left',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+  },
+  paper: {
+    width: '100%',
+    padding: theme.spacing(4),
+    borderRadius: '2rem',
   },
   submit: {
     margin: theme.spacing(1, 0, 1),
