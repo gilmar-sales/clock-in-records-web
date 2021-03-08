@@ -13,13 +13,12 @@ import RegisterItem from '../../molecules/RegisterItem';
 import useStyles from './styles';
 import { Register } from '../../../@types/register';
 
-const RegisterList: React.FC = (props) => {
-  const classes = useStyles();
+interface RegisterListProps {
+  registers: Register[];
+}
 
-  const registers: Register[] = [
-    { user: { id: 1, name: 'Gilmar', email: '' }, date: new Date(Date.now()) },
-    { user: { id: 2, name: 'Paulo', email: '' }, date: new Date(Date.now()) },
-  ];
+const RegisterList: React.FC<RegisterListProps> = ({ registers }) => {
+  const classes = useStyles();
 
   return (
     <TableContainer className={classes.container}>
