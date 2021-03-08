@@ -1,9 +1,22 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  container: {
+    height: '100%',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: theme.spacing(2),
+  },
+  title: {
+    fontFamily: 'Nunito',
+    fontSize: '2rem',
+  },
+  body: {
     width: '100%',
-    borderSpacing: 0,
+    borderSpacing: theme.spacing(1, 3),
+    borderCollapse: 'separate',
   },
 }));
 

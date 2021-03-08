@@ -1,26 +1,40 @@
-import { TableCell, TableRow } from '@material-ui/core';
+import { Box, TableCell, TableRow } from '@material-ui/core';
 import React from 'react';
+import { Register } from '../../../@types/register';
+
+import useStyles from './styles';
 
 interface RegisterItemProps {
-  user: string;
-  data: Date;
+  register: Register;
 }
 
-const RegisterItem: React.FC<RegisterItemProps> = (props) => {
+const RegisterItem: React.FC<RegisterItemProps> = ({ register, ...props }) => {
+  const classes = useStyles();
+
   return (
-    <TableRow>
-      <TableCell scope="row">{props.user}</TableCell>
-      <TableCell align="center">{`${props.data.toLocaleDateString('en-US', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      })}`}</TableCell>
-      <TableCell align="right">{`${props.data.toLocaleString('en-US', {
-        hour12: false,
-        hour: '2-digit',
-        minute: '2-digit',
-      })}h`}</TableCell>
-    </TableRow>
+    <Box className={classes.root}>
+      <div className={classes.cell}>
+        <div className={classes.decoration}></div>
+        <div>
+          {register.user.name}
+          {Number(1).toString().padStart(3, '0')}
+        </div>
+      </div>
+      <div className={classes.cell}>
+        {`${register.date.toLocaleDateString('en-US', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        })}`}
+      </div>
+      <div className={classes.cell}>
+        {`${register.date.toLocaleString('en-US', {
+          hour12: false,
+          hour: '2-digit',
+          minute: '2-digit',
+        })}h`}
+      </div>
+    </Box>
   );
 };
 
