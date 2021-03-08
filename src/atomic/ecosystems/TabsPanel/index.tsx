@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Button,
-  Divider,
-  Tab,
-  Tabs,
-  useMediaQuery,
-} from '@material-ui/core';
+import { Button, Divider, Tab, Tabs, useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
 import {
@@ -27,50 +19,26 @@ const TabsPanel: React.FC = (props) => {
   const [active, setActive] = useState(0);
 
   function a11yProps(index: number) {
-    console.log(index);
     return {
       id: `vertical-tab-${index}`,
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
 
-  if (renderMobile)
-    return (
-      <div className={classes.rootMobile}>
-        <div className={classes.content}>{props.children}</div>
-        <BottomNavigation
-          value={active}
-          onChange={(event, newValue) => {
-            setActive(newValue);
-          }}
-          showLabels
-          className={classes.bottomNav}
-        >
-          <BottomNavigationAction
-            label="Dashboard"
-            icon={<DashboardOutlined />}
-          />
-          <BottomNavigationAction
-            label="Meus Registros"
-            icon={<AssignmentOutlined />}
-          />
-        </BottomNavigation>
-      </div>
-    );
-
   return (
-    <div className={classes.root}>
-      <div className={classes.panel}>
-        <div className={classes.menu}>
+    <div className={renderMobile ? classes.rootMobile : classes.root}>
+      <div className={renderMobile ? classes.panelMobile : classes.panel}>
+        <div className={renderMobile ? classes.menuMobile : classes.menu}>
           <div className={classes.logo}>
             <LogoIcon width={48} height={48} color="#39E991" />
           </div>
           <Tabs
-            orientation="vertical"
             value={active}
             onChange={(event, newValue) => {
               setActive(newValue);
             }}
+            indicatorColor="secondary"
+            orientation={renderMobile ? 'horizontal' : 'vertical'}
           >
             <Divider variant="fullWidth" className={classes.divider} />
             <Tab
@@ -79,6 +47,7 @@ const TabsPanel: React.FC = (props) => {
               value={0}
               {...a11yProps(0)}
               className={active === 0 ? classes.tabActive : ''}
+              style={{ flexGrow: 1 }}
             />
             <Divider variant="fullWidth" className={classes.divider} />
             <Tab
@@ -88,10 +57,13 @@ const TabsPanel: React.FC = (props) => {
               value={1}
               {...a11yProps(1)}
               className={active === 1 ? classes.tabActive : ''}
+              style={{ flexGrow: 1 }}
             />
           </Tabs>
         </div>
-        <Button className={classes.button}>
+        <Button
+          className={renderMobile ? classes.buttonMobile : classes.button}
+        >
           <ExitToApp />
         </Button>
       </div>
