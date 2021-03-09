@@ -111,6 +111,7 @@ const TabsPanel: React.FC = (props) => {
                 onClick={() => history.push('/panel/users')}
               />
             )}
+            {authCtx.isAdmin() && <Divider className={classes.divider} />}
           </Tabs>
         </div>
         <Button
