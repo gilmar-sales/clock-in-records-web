@@ -72,7 +72,6 @@ const TabsPanel: React.FC = (props) => {
             onChange={(event, newValue) => {
               setActive(newValue);
             }}
-            indicatorColor="secondary"
             orientation={renderMobile ? 'horizontal' : 'vertical'}
           >
             <Divider className={classes.divider} />
