@@ -1,27 +1,35 @@
+import React, { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
-import React from 'react';
+import { gql, useQuery } from '@apollo/client';
+
 import { Register } from '../../../@types/register';
 import RegisterList from '../../organisms/RegisterList';
 
 import useStyles from './styles';
 
-const Registers: React.FC = () => {
-  const classes = useStyles();
+const LIST_USER_REGISTERS = gql`
+  query listUserRegisters {
+    listUserRegisters {
+      id
+      timeRegistered
+      user {
+        id
+        name
+      }
+    }
+  }
+`;
 
-  const registers: Register[] = [
-    {
-      user: { id: 1, name: 'Gilmar', email: '', role: 'admin' },
-      date: new Date(Date.now()),
-    },
-    {
-      user: { id: 1, name: 'Gilmar', email: '', role: 'admin' },
-      date: new Date(Date.now()),
-    },
-    {
-      user: { id: 1, name: 'Gilmar', email: '', role: 'admin' },
-      date: new Date(Date.now()),
-    },
-  ];
+const Registers: React.FC = () => {
+  const [registers, setRegisters] = useState<Register[]>([]);
+  const classes = useStyles();
+  const { data } = useQuery(LIST_USER_REGISTERS);
+
+  useEffect(() => {
+    if (data) {
+      setRegisters(data.listUserRegisters);
+    }
+  }, [data]);
 
   return (
     <div className={classes.root}>
