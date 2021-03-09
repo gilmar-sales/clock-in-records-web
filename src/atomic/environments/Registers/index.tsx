@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Backdrop, Button, Drawer, TextField } from '@material-ui/core';
+import {
+  Backdrop,
+  Button,
+  Drawer,
+  MenuItem,
+  Select,
+  TextField,
+} from '@material-ui/core';
 import { gql, useMutation, useQuery } from '@apollo/client';
 
 import { Register } from '../../../@types/register';
@@ -12,6 +19,7 @@ const LIST_USER_REGISTERS = gql`
     listUserRegisters {
       id
       timeRegistered
+      type
       user {
         id
         name
@@ -21,10 +29,11 @@ const LIST_USER_REGISTERS = gql`
 `;
 
 const CREATE_REGISTER = gql`
-  mutation createRegister($date: DateTime!) {
-    createRegister(timeRegistered: $date) {
+  mutation createRegister($date: DateTime!, $type: String!) {
+    createRegister(timeRegistered: $date, type: $type) {
       id
       timeRegistered
+      type
       user {
         id
         name
@@ -43,6 +52,7 @@ const Registers: React.FC = () => {
   const [createRegister] = useMutation(CREATE_REGISTER);
 
   const [date, setDate] = useState('');
+  const [type, setType] = useState('in');
 
   useEffect(() => {
     if (data) {
@@ -53,7 +63,7 @@ const Registers: React.FC = () => {
   const handleSubmit = () => {
     setDrawerOpen(false);
 
-    createRegister({ variables: { date } })
+    createRegister({ variables: { date, type } })
       .then((response) => {
         setRegisters([response.data.createRegister, ...registers]);
       })
@@ -89,6 +99,15 @@ const Registers: React.FC = () => {
                 value={date}
                 onChange={(event) => setDate(event.target.value)}
               />
+
+              <div>Type</div>
+              <Select
+                value={type}
+                onChange={(event) => setType(String(event.target.value))}
+              >
+                <MenuItem value={'in'}>In</MenuItem>
+                <MenuItem value={'out'}>Out</MenuItem>
+              </Select>
             </div>
           </div>
           <div className={classes.bottom}>

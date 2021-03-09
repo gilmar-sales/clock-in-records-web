@@ -10,6 +10,7 @@ const LIST_REGISTERS = gql`
     listRegisters {
       id
       timeRegistered
+      type
       user {
         id
         name
@@ -25,6 +26,7 @@ const REGISTER_ADDED = gql`
     registerAdded {
       id
       timeRegistered
+      type
       user {
         id
         name
