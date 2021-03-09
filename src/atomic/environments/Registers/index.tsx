@@ -103,6 +103,7 @@ const Registers: React.FC = () => {
               <div>Type</div>
               <Select
                 value={type}
+                color="secondary"
                 onChange={(event) => setType(String(event.target.value))}
               >
                 <MenuItem value={'in'}>In</MenuItem>
