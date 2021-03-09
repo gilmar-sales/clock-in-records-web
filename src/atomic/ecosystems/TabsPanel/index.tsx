@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Button,
   Divider,
@@ -14,18 +14,31 @@ import {
   PeopleOutline,
   ExitToApp,
 } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import AuthContext from '../../../contexts/auth';
 
 import useStyles from './styles';
 import LogoIcon from '../../atoms/LogoIcon';
-import { useHistory } from 'react-router-dom';
 
 const TabsPanel: React.FC = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
+
+  const authCtx = useContext(AuthContext);
+
   const renderMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(() => {
+    switch (history.location.pathname) {
+      case '/panel/dashboard':
+        return 0;
+      case '/panel/registers':
+        return 0;
+      case '/panel/users':
+        return 1;
+    }
+  });
 
   function a11yProps(index: number) {
     return {
@@ -62,41 +75,47 @@ const TabsPanel: React.FC = (props) => {
             indicatorColor="secondary"
             orientation={renderMobile ? 'horizontal' : 'vertical'}
           >
-            <Divider variant="fullWidth" className={classes.divider} />
-            <Tab
-              icon={<DashboardOutlined />}
-              label={'Dashboard'}
-              value={0}
-              {...a11yProps(0)}
-              className={active === 0 ? classes.tabActive : ''}
-              style={{ flexGrow: 1 }}
-              onClick={() => history.push('/panel/dashboard')}
-            />
-            <Divider variant="fullWidth" className={classes.divider} />
-            <Tab
-              icon={<PeopleOutline />}
-              label={'Users'}
-              wrapped
-              value={1}
-              {...a11yProps(1)}
-              className={active === 1 ? classes.tabActive : ''}
-              style={{ flexGrow: 1 }}
-              onClick={() => history.push('/panel/users')}
-            />
-            <Tab
-              icon={<AssignmentOutlined />}
-              label={'My Registers'}
-              wrapped
-              value={2}
-              {...a11yProps(2)}
-              className={active === 2 ? classes.tabActive : ''}
-              style={{ flexGrow: 1 }}
-              onClick={() => history.push('/panel/registers')}
-            />
+            <Divider className={classes.divider} />
+            {authCtx.isAdmin() ? (
+              <Tab
+                icon={<DashboardOutlined />}
+                label={'Dashboard'}
+                value={0}
+                {...a11yProps(0)}
+                className={active === 0 ? classes.tabActive : ''}
+                style={{ flexGrow: 1 }}
+                onClick={() => history.push('/panel/dashboard')}
+              />
+            ) : (
+              <Tab
+                icon={<AssignmentOutlined />}
+                label={'My Registers'}
+                wrapped
+                value={0}
+                {...a11yProps(0)}
+                className={active === 0 ? classes.tabActive : ''}
+                style={{ flexGrow: 1 }}
+                onClick={() => history.push('/panel/registers')}
+              />
+            )}
+            <Divider className={classes.divider} />
+            {authCtx.isAdmin() && (
+              <Tab
+                icon={<PeopleOutline />}
+                label={'Users'}
+                wrapped
+                value={1}
+                {...a11yProps(1)}
+                className={active === 1 ? classes.tabActive : ''}
+                style={{ flexGrow: 1 }}
+                onClick={() => history.push('/panel/users')}
+              />
+            )}
           </Tabs>
         </div>
         <Button
           className={renderMobile ? classes.buttonMobile : classes.button}
+          onClick={() => authCtx.handleLogout()}
         >
           <ExitToApp />
         </Button>
