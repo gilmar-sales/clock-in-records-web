@@ -26,7 +26,7 @@ const RegisterItem: React.FC<RegisterItemProps> = ({ register }) => {
       </TableCell>
       <TableCell className={classes.bodyCell}>
         <span className={classes.date}>
-          {`${register.date.toLocaleDateString('en-US', {
+          {`${new Date(register.timeRegistered).toLocaleDateString('en-US', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
@@ -35,7 +35,7 @@ const RegisterItem: React.FC<RegisterItemProps> = ({ register }) => {
       </TableCell>
       <TableCell className={classes.lastCell}>
         <span className={classes.hour}>
-          {`${register.date.toLocaleString('en-US', {
+          {`${new Date(register.timeRegistered).toLocaleString('en-US', {
             hour12: false,
             hour: '2-digit',
             minute: '2-digit',
