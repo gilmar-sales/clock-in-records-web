@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '2rem',
     fontFamily: 'Nunito',
     border: 0,
+    padding: theme.spacing(2),
   },
 }));
 

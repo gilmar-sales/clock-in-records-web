@@ -22,8 +22,8 @@ const RegisterList: React.FC<RegisterListProps> = ({ registers }) => {
 
   return (
     <TableContainer className={classes.container}>
-      <Table className={classes.table} size="small">
-        <TableHead>
+      <Table stickyHeader className={classes.table} size="small">
+        <TableHead className={classes.headCell}>
           <TableRow>
             <TableCell className={classes.headCell}>Collaborator</TableCell>
 
