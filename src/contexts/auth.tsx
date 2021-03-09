@@ -7,6 +7,7 @@ interface AuthContextProps {
   tokenPayload: TokenPayload;
   handleLogin: (tokenPayload: TokenPayload) => void;
   handleLogout: () => void;
+  isAdmin: () => boolean;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
@@ -38,6 +39,10 @@ export const AuthContextProvider: React.FC = (props) => {
     history.push('/login');
   };
 
+  const isAdmin = () => {
+    return tokenPayload.user.role === 'administrator';
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -45,6 +50,7 @@ export const AuthContextProvider: React.FC = (props) => {
         tokenPayload,
         handleLogin,
         handleLogout,
+        isAdmin,
       }}
     >
       {props.children}
