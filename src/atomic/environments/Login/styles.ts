@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     userSelect: 'none',
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.background.paper,
   },
   content: {
     display: 'flex',
