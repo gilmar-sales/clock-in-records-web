@@ -9,12 +9,14 @@ const Dashboard: React.FC = () => {
 
   const registers: Register[] = [
     {
+      id: 1,
       user: { id: 1, name: 'Gilmar', email: '', role: 'admin' },
-      date: new Date(Date.now()),
+      timeRegistered: new Date(Date.now()),
     },
     {
+      id: 2,
       user: { id: 2, name: 'Paulo', email: '', role: 'admin' },
-      date: new Date(Date.now()),
+      timeRegistered: new Date(Date.now()),
     },
   ];
 
