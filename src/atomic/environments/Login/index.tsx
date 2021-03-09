@@ -123,7 +123,6 @@ const Login: React.FC = () => {
               name="password"
               color="secondary"
               autoComplete="password"
-              autoFocus
               onChange={(event) => setPassword(event.target.value)}
             />
             <Button
