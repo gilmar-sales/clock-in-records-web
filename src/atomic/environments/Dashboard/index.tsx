@@ -20,16 +20,39 @@ const LIST_REGISTERS = gql`
   }
 `;
 
+const REGISTER_ADDED = gql`
+  subscription registerAdded {
+    registerAdded {
+      id
+      timeRegistered
+      user {
+        id
+        name
+        email
+      }
+    }
+  }
+`;
+
 const Dashboard: React.FC = () => {
   const [registers, setRegisters] = useState<Register[]>([]);
   const classes = useStyles();
   const { data } = useQuery(LIST_REGISTERS);
+  const registerSubData = useSubscription(REGISTER_ADDED).data;
 
   useEffect(() => {
     if (data) {
       setRegisters(data.listRegisters);
     }
   }, [data]);
+
+  useEffect(() => {
+    console.log(registerSubData);
+
+    if (registerSubData) {
+      setRegisters([registerSubData.registerAdded, ...registers]);
+    }
+  }, [registerSubData]);
 
   return (
     <div className={classes.root}>
