@@ -1,24 +1,35 @@
-import React from 'react';
+import { gql, useQuery, useSubscription } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 import { Register } from '../../../@types/register';
 import RegisterList from '../../organisms/RegisterList';
 
 import useStyles from './styles';
 
-const Dashboard: React.FC = () => {
-  const classes = useStyles();
+const LIST_REGISTERS = gql`
+  query listRegisters {
+    listRegisters {
+      id
+      timeRegistered
+      user {
+        id
+        name
+        email
+        role
+      }
+    }
+  }
+`;
 
-  const registers: Register[] = [
-    {
-      id: 1,
-      user: { id: 1, name: 'Gilmar', email: '', role: 'admin' },
-      timeRegistered: new Date(Date.now()),
-    },
-    {
-      id: 2,
-      user: { id: 2, name: 'Paulo', email: '', role: 'admin' },
-      timeRegistered: new Date(Date.now()),
-    },
-  ];
+const Dashboard: React.FC = () => {
+  const [registers, setRegisters] = useState<Register[]>([]);
+  const classes = useStyles();
+  const { data } = useQuery(LIST_REGISTERS);
+
+  useEffect(() => {
+    if (data) {
+      setRegisters(data.listRegisters);
+    }
+  }, [data]);
 
   return (
     <div className={classes.root}>
