@@ -11,15 +11,18 @@ import {
 import {
   AssignmentOutlined,
   DashboardOutlined,
+  PeopleOutline,
   ExitToApp,
 } from '@material-ui/icons';
 
 import useStyles from './styles';
 import LogoIcon from '../../atoms/LogoIcon';
+import { useHistory } from 'react-router-dom';
 
 const TabsPanel: React.FC = (props) => {
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
   const renderMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const [active, setActive] = useState(0);
@@ -67,16 +70,28 @@ const TabsPanel: React.FC = (props) => {
               {...a11yProps(0)}
               className={active === 0 ? classes.tabActive : ''}
               style={{ flexGrow: 1 }}
+              onClick={() => history.push('/panel/dashboard')}
             />
             <Divider variant="fullWidth" className={classes.divider} />
             <Tab
-              icon={<AssignmentOutlined />}
-              label={'Meus Registros'}
+              icon={<PeopleOutline />}
+              label={'Users'}
               wrapped
               value={1}
               {...a11yProps(1)}
               className={active === 1 ? classes.tabActive : ''}
               style={{ flexGrow: 1 }}
+              onClick={() => history.push('/panel/users')}
+            />
+            <Tab
+              icon={<AssignmentOutlined />}
+              label={'My Registers'}
+              wrapped
+              value={2}
+              {...a11yProps(2)}
+              className={active === 2 ? classes.tabActive : ''}
+              style={{ flexGrow: 1 }}
+              onClick={() => history.push('/panel/registers')}
             />
           </Tabs>
         </div>
