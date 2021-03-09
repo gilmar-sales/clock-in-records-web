@@ -36,7 +36,7 @@ export const AuthContextProvider: React.FC = (props) => {
   const handleLogout = () => {
     setAuthenticated(false);
     localStorage.removeItem('@token_payload');
-    history.push('/login');
+    history.push('/');
   };
 
   const isAdmin = () => {

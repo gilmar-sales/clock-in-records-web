@@ -14,7 +14,7 @@ export default function Routes() {
     <BrowserRouter>
       <AuthContextProvider>
         <Switch>
-          <Route path="/login" component={LoginEnvironment} />
+          <Route path="/" exact component={LoginEnvironment} />
           <Route
             path="/panel"
             component={({ match }: { match: any }) => (
