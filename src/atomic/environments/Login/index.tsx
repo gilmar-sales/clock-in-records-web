@@ -120,6 +120,7 @@ const Login: React.FC = () => {
               fullWidth
               id="password"
               label="Password"
+              type="password"
               name="password"
               color="secondary"
               autoComplete="password"
