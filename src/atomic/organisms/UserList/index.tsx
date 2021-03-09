@@ -35,7 +35,6 @@ const UserList: React.FC<UserListProps> = ({ data }) => {
             <TableRow key={user.id} className={classes.bodyRow}>
               <TableCell className={classes.firstCell}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div className={classes.decoration} />
                   <div className={classes.name}>
                     {user.name}
                     <div className={classes.number}>

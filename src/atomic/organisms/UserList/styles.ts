@@ -12,13 +12,6 @@ const useStyles = makeStyles((theme) => ({
     borderCollapse: 'separate',
     borderSpacing: '0 20px',
   },
-  decoration: {
-    width: 4,
-    height: 28,
-    backgroundColor: '#6FCF97',
-    borderRadius: '1rem',
-    marginRight: theme.spacing(8),
-  },
   headCell: {
     fontSize: '2rem',
     fontFamily: 'Nunito',
@@ -33,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '1rem 0 0 1rem',
     border: 0,
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 6),
   },
   bodyCell: {
     fontSize: '1.5rem',
