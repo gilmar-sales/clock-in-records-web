@@ -1,10 +1,17 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  decoration: {
+  inDecoration: {
     width: 4,
     height: 28,
     backgroundColor: '#6FCF97',
+    borderRadius: '1rem',
+    marginRight: theme.spacing(8),
+  },
+  outDecoration: {
+    width: 4,
+    height: 28,
+    backgroundColor: 'red',
     borderRadius: '1rem',
     marginRight: theme.spacing(8),
   },

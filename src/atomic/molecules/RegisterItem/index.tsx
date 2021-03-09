@@ -15,7 +15,13 @@ const RegisterItem: React.FC<RegisterItemProps> = ({ register }) => {
     <TableRow className={classes.bodyRow}>
       <TableCell className={classes.firstCell}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div className={classes.decoration} />
+          <div
+            className={
+              register.type === 'in'
+                ? classes.inDecoration
+                : classes.outDecoration
+            }
+          />
           <div className={classes.name}>
             {register.user.name}
             <div className={classes.number}>
