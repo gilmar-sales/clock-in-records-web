@@ -40,7 +40,7 @@ export const AuthContextProvider: React.FC = (props) => {
   };
 
   const isAdmin = () => {
-    return tokenPayload.user.role === 'administrator';
+    return tokenPayload.user?.role === 'administrator';
   };
 
   return (
