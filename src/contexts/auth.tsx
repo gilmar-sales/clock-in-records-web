@@ -1,9 +1,10 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { TokenPayload } from '../@types/token-payload';
+import usePersistedState from '../utils/usePersistedState';
 
 interface AuthContextProps {
-  isAuthenticated: boolean;
+  isAuthenticated: () => boolean;
   tokenPayload: TokenPayload;
   handleLogin: (tokenPayload: TokenPayload) => void;
   handleLogout: () => void;
@@ -13,20 +14,15 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 export const AuthContextProvider: React.FC = (props) => {
-  const [isAuthenticated, setAuthenticated] = useState(false);
-  const [tokenPayload, setTokenPayload] = useState(
-    () =>
-      JSON.parse(
-        localStorage.getItem('@token_payload') || '{}',
-      ) as TokenPayload,
+  const [tokenPayload, setTokenPayload] = usePersistedState<TokenPayload>(
+    '@token_payload',
+    { user: undefined, token: undefined },
   );
 
   const history = useHistory();
 
   const handleLogin = (tokenPayload: TokenPayload) => {
-    setAuthenticated(true);
     setTokenPayload(tokenPayload);
-    localStorage.setItem('@token_payload', JSON.stringify(tokenPayload));
 
     if (tokenPayload.user.role === 'administrator')
       history.push('/panel/dashboard');
@@ -34,9 +30,12 @@ export const AuthContextProvider: React.FC = (props) => {
   };
 
   const handleLogout = () => {
-    setAuthenticated(false);
-    localStorage.removeItem('@token_payload');
     history.push('/');
+    setTokenPayload({ user: undefined, token: undefined });
+  };
+
+  const isAuthenticated = () => {
+    return Boolean(tokenPayload.user);
   };
 
   const isAdmin = () => {
