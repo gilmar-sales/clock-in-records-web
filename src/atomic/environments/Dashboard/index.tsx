@@ -49,8 +49,6 @@ const Dashboard: React.FC = () => {
   }, [data]);
 
   useEffect(() => {
-    console.log(registerSubData);
-
     if (registerSubData) {
       setRegisters([registerSubData.registerAdded, ...registers]);
     }

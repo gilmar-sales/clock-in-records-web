@@ -66,7 +66,6 @@ const Users: React.FC = () => {
   useEffect(() => {
     if (data) {
       setUsers(data.listUsers);
-      console.log(data.listUsers);
     }
   }, [data]);
 
