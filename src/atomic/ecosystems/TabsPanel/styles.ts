@@ -50,15 +50,14 @@ const useStyles = makeStyles((theme) => ({
     transition: 'transform .3s ease',
   },
   button: {
-    width: '100%',
-    borderRadius: 0,
-    padding: theme.spacing(3),
-    borderTop: `1px solid ${theme.palette.divider}`,
-  },
-  buttonMobile: {
     borderRadius: 0,
     padding: theme.spacing(3),
     borderLeft: `1px solid ${theme.palette.divider}`,
+    [theme.breakpoints.up('sm')]: {
+      width: '100%',
+      borderTop: `1px solid ${theme.palette.divider}`,
+      borderLeft: 0,
+    },
   },
 }));
 
