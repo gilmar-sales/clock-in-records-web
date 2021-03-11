@@ -29,21 +29,22 @@ const TabsPanel: React.FC = (props) => {
 
   const renderMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const [active, setActive] = useState(() => {
-    switch (history.location.pathname) {
-      case '/panel/dashboard':
-        return 0;
-      case '/panel/registers':
-        return 0;
-      case '/panel/users':
-        return 1;
-    }
-  });
+  const [active, setActive] = useState(history.location.pathname);
 
-  function a11yProps(index: number) {
+  function MDivider() {
+    return (
+      <Divider
+        orientation={renderMobile ? 'vertical' : 'horizontal'}
+        variant="middle"
+      />
+    );
+  }
+
+  function tabProps(path: string) {
     return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
+      value: path,
+      onClick: () => history.push(path),
+      className: active === path ? classes.tabActive : '',
     };
   }
 
@@ -74,47 +75,38 @@ const TabsPanel: React.FC = (props) => {
             }}
             orientation={renderMobile ? 'horizontal' : 'vertical'}
           >
-            <Divider className={classes.divider} />
+            <MDivider />
             {authCtx.isAdmin() ? (
               <Tab
                 icon={<DashboardOutlined />}
                 label={'Dashboard'}
-                value={0}
-                {...a11yProps(0)}
-                className={active === 0 ? classes.tabActive : ''}
-                style={{ flexGrow: 1 }}
-                onClick={() => history.push('/panel/dashboard')}
+                wrapped
+                {...tabProps('/panel/dashboard')}
               />
             ) : (
               <Tab
                 icon={<AssignmentOutlined />}
+                style={{ flexGrow: 1 }}
                 label={'My Registers'}
                 wrapped
-                value={0}
-                {...a11yProps(0)}
-                className={active === 0 ? classes.tabActive : ''}
-                style={{ flexGrow: 1 }}
-                onClick={() => history.push('/panel/registers')}
+                {...tabProps('/panel/registers')}
               />
             )}
-            <Divider className={classes.divider} />
+            {authCtx.isAdmin() && <MDivider />}
             {authCtx.isAdmin() && (
               <Tab
                 icon={<PeopleOutline />}
                 label={'Users'}
-                wrapped
-                value={1}
-                {...a11yProps(1)}
-                className={active === 1 ? classes.tabActive : ''}
                 style={{ flexGrow: 1 }}
-                onClick={() => history.push('/panel/users')}
+                wrapped
+                {...tabProps('/panel/users')}
               />
             )}
-            {authCtx.isAdmin() && <Divider className={classes.divider} />}
+            <MDivider />
           </Tabs>
         </div>
         <Button
-          className={renderMobile ? classes.buttonMobile : classes.button}
+          className={classes.button}
           onClick={() => authCtx.handleLogout()}
         >
           <ExitToApp />
