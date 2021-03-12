@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
   },
   date: {
-    width: 200,
     padding: theme.spacing(0, 0, 3, 0),
   },
   bottom: {

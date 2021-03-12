@@ -70,6 +70,8 @@ const Registers: React.FC = () => {
 
     createRegister({ variables: { date, type } })
       .then((response) => {
+        setType('in');
+        setDate(new Date());
         setRegisters([response.data.createRegister, ...registers]);
       })
       .catch((error) => {
@@ -101,7 +103,9 @@ const Registers: React.FC = () => {
                 <KeyboardDateTimePicker
                   className={classes.date}
                   variant="inline"
+                  inputVariant="outlined"
                   color="secondary"
+                  fullWidth
                   value={date}
                   onChange={(value) => setDate(value as Date)}
                 />
@@ -109,8 +113,10 @@ const Registers: React.FC = () => {
 
               <div>Type</div>
               <Select
-                value={type}
+                variant="outlined"
                 color="secondary"
+                fullWidth
+                value={type}
                 onChange={(event) => setType(String(event.target.value))}
               >
                 <MenuItem value={'in'}>In</MenuItem>
