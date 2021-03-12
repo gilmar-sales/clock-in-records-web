@@ -20,7 +20,7 @@ const UserList: React.FC<UserListProps> = ({ data }) => {
 
   return (
     <TableContainer className={classes.container}>
-      <Table size="small" className={classes.table}>
+      <Table size="small" stickyHeader className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell className={classes.headCell}>Name</TableCell>
