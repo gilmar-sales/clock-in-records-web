@@ -18,6 +18,7 @@ import LogoIcon from '../../atoms/LogoIcon';
 import useStyles from './styles';
 import AuthContext from '../../../contexts/auth';
 import { TokenPayload } from '../../../@types/token-payload';
+import { Redirect } from 'react-router';
 
 const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -59,6 +60,12 @@ const Login: React.FC = () => {
         setError(field, { message });
       });
   };
+
+  if (authCtx.isAuthenticated()) {
+    if (authCtx.isAdmin()) return <Redirect to="/panel/dashboard" />;
+
+    return <Redirect to="/panel/registers" />;
+  }
 
   return (
     <Grid
