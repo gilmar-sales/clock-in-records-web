@@ -50,7 +50,14 @@ const CREATE_USER = gql`
 `;
 
 const schema = yup.object().shape({
-  name: yup.string().min(3).required(),
+  name: yup
+    .string()
+    .min(3)
+    .matches(
+      /^[a-zA-Z\s]*$/,
+      'name must have only characters between a-z and spaces',
+    )
+    .required(),
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
   role: yup.string().default('collaborator').required(),
