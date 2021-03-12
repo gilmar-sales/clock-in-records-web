@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   listContainer: {
-    height: '70vh',
+    height: '85vh',
+    [theme.breakpoints.up('sm')]: {
+      height: '90vh',
+    },
     padding: theme.spacing(3),
   },
 }));
