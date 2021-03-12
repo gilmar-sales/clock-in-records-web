@@ -3,6 +3,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Backdrop,
   Button,
+  Divider,
   Drawer,
   FormControl,
   InputLabel,
@@ -13,8 +14,11 @@ import {
 
 import { User } from '../../../@types/user';
 import UserList from '../../organisms/UserList';
+import * as yup from 'yup';
 
 import useStyles from './styles';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const LIST_USERS = gql`
   query listUsers {
@@ -45,20 +49,26 @@ const CREATE_USER = gql`
   }
 `;
 
+const schema = yup.object().shape({
+  name: yup.string().min(3).required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+  role: yup.string().default('collaborator').required(),
+});
+
 const Users: React.FC = () => {
   const classes = useStyles();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
 
+  const { control, errors, handleSubmit, setError } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('collaborator');
-
-  // const users: User[] = [
-  //   { id: 1, name: 'Gilmar', email: '', role: 'admin' },
-  //   { id: 2, name: 'Paulo', email: '', role: 'admin' },
-  // ];
 
   const { data } = useQuery(LIST_USERS);
   const [createUser] = useMutation(CREATE_USER);
@@ -69,21 +79,23 @@ const Users: React.FC = () => {
     }
   }, [data]);
 
-  const handleSubmit = () => {
-    setDrawerOpen(false);
+  const onSubmit = (data: any) => {
+    console.log(data);
 
-    createUser({ variables: { name, email, password, role } })
+    createUser({ variables: data })
       .then((response) => {
         setUsers([response.data.createUser, ...users]);
+        setName('');
+        setEmail('');
+        setPassword('');
+        setRole('collaborator');
+        setDrawerOpen(false);
       })
       .catch((error) => {
-        console.log(error);
+        const [field, message] = error.message.split(':');
+        setError(field, { message });
+        console.log(errors);
       });
-
-    setName('');
-    setEmail('');
-    setPassword('');
-    setRole('collaborator');
   };
 
   return (
@@ -97,10 +109,11 @@ const Users: React.FC = () => {
           elevation={2}
           classes={{ paper: classes.drawer }}
         >
-          <div>
-            <h2 className={classes.title}>New User</h2>
-            <div className={classes.form}>
-              <TextField
+          <h2 className={classes.title}>New User</h2>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+            <div className={classes.fields}>
+              <Controller
+                as={TextField}
                 variant="outlined"
                 margin="normal"
                 required
@@ -108,37 +121,45 @@ const Users: React.FC = () => {
                 id="name"
                 label="Name"
                 name="name"
-                color="secondary"
-                autoComplete="name"
                 value={name}
-                onChange={(event) => setName(event.target.value)}
+                defaultValue=""
+                color={!errors.name ? 'secondary' : undefined}
+                control={control}
+                error={Boolean(errors.name)}
+                helperText={errors.name?.message}
               />
-              <TextField
+              <Controller
+                as={TextField}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                label="E-mail"
+                label="Email"
                 name="email"
-                color="secondary"
-                autoComplete="email"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                defaultValue=""
+                color={!errors.email ? 'secondary' : undefined}
+                control={control}
+                error={Boolean(errors.email)}
+                helperText={errors.email?.message}
               />
-              <TextField
+              <Controller
+                as={TextField}
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
                 id="password"
                 label="Password"
-                type="password"
                 name="password"
-                color="secondary"
-                autoComplete="password"
+                type="password"
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                defaultValue=""
+                color={!errors.password ? 'secondary' : undefined}
+                control={control}
+                error={Boolean(errors.password)}
+                helperText={errors.password?.message}
               />
               <FormControl
                 variant="outlined"
@@ -146,39 +167,49 @@ const Users: React.FC = () => {
                 color="secondary"
                 style={{ marginTop: 16 }}
               >
-                <InputLabel>Role</InputLabel>
-                <Select
-                  label="Role"
+                <InputLabel style={{ backgroundColor: 'white' }}>
+                  Role
+                </InputLabel>
+                <Controller
+                  as={Select}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="role"
+                  name="role"
                   value={role}
-                  onChange={(event) => setRole(String(event.target.value))}
+                  defaultValue="collaborator"
+                  color={!errors.role ? 'secondary' : undefined}
+                  control={control}
+                  error={Boolean(errors.role)}
                 >
                   <MenuItem value={'collaborator'}>Collaborator</MenuItem>
                   <MenuItem value={'administrator'}>Administrator</MenuItem>
-                </Select>
+                </Controller>
               </FormControl>
             </div>
-          </div>
-          <div className={classes.bottom}>
-            <Button
-              variant="contained"
-              color="secondary"
-              fullWidth
-              disabled={Boolean(
-                name.length === 0 || email.length === 0 || password.length < 6,
-              )}
-              onClick={handleSubmit}
-            >
-              Register
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              onClick={() => setDrawerOpen(false)}
-            >
-              Cancel
-            </Button>
-          </div>
+            <div>
+              <Divider />
+              <div className={classes.bottom}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                >
+                  Create
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  fullWidth
+                  onClick={() => setDrawerOpen(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </form>
         </Drawer>
       </Backdrop>
       <div className={classes.menu}>

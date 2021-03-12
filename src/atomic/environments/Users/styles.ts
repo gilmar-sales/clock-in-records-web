@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: 400,
     },
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
   },
   title: {
     fontWeight: 100,
@@ -35,7 +32,13 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
   form: {
-    padding: theme.spacing(3, 6),
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  fields: {
+    padding: theme.spacing(2, 6),
   },
   userName: {
     fontWeight: 400,
