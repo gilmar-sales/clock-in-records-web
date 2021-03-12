@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Backdrop, Button, Drawer, MenuItem, Select } from '@material-ui/core';
+import {
+  Backdrop,
+  Button,
+  Divider,
+  Drawer,
+  MenuItem,
+  Select,
+} from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   KeyboardDateTimePicker,
@@ -111,23 +118,26 @@ const Registers: React.FC = () => {
               </Select>
             </div>
           </div>
-          <div className={classes.bottom}>
-            <Button
-              variant="contained"
-              color="secondary"
-              fullWidth
-              onClick={() => handleSubmit()}
-            >
-              Register
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              onClick={() => setDrawerOpen(false)}
-            >
-              Cancel
-            </Button>
+          <div>
+            <Divider />
+            <div className={classes.bottom}>
+              <Button
+                variant="contained"
+                color="secondary"
+                fullWidth
+                onClick={() => handleSubmit()}
+              >
+                Register
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                onClick={() => setDrawerOpen(false)}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         </Drawer>
       </Backdrop>

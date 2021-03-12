@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
   form: {
-    padding: theme.spacing(3, 6),
+    padding: theme.spacing(3, 5),
   },
   userName: {
     fontWeight: 400,
