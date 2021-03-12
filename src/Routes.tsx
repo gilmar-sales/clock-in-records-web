@@ -58,6 +58,7 @@ export default function Routes() {
               path={`${match.path}/users`}
               component={UsersEnvironment}
             />
+            <Route path="*" component={NotFoundEnvironment} />
           </TabsPanel>
         )}
       />
