@@ -6,6 +6,8 @@ import LoginEnvironment from './atomic/environments/Login';
 import RegistersEnvironment from './atomic/environments/Registers';
 import DashboardEnvironment from './atomic/environments/Dashboard';
 import UsersEnvironment from './atomic/environments/Users';
+import NotFoundEnvironment from './atomic/environments/NotFound';
+
 import AuthContext from './contexts/auth';
 
 interface ProtectedRouteProps extends RouteProps {
@@ -59,6 +61,8 @@ export default function Routes() {
           </TabsPanel>
         )}
       />
+
+      <Route path="*" component={NotFoundEnvironment} />
     </Switch>
   );
 }
