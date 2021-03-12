@@ -38,7 +38,9 @@ The development proposal consists of the implementation of a system for the mana
 
 - [ReactJS](https://reactjs.org/): A declarative, efficient, and flexible JavaScript library for building user interfaces.
 - [MaterialUI](https://material-ui.com/): Material-UI is a simple and customizable component library to build faster, beautiful, and more accessible React applications.
-- [GraphQL](https://github.com/graphql/graphql-js): GraphQL is a query language and execution engine tied to any backend service.
+- [Apollo Client](https://www.apollographql.com/docs/react/): A comprehensive state management library for JavaScript that enables you to manage both local and remote data with GraphQL.
+- [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation.
+- [Yup](https://www.npmjs.com/package/yup): A JavaScript schema builder for value parsing and validation.
 
 ## Installation
 
