@@ -44,21 +44,23 @@ export default function Routes() {
         path="/panel"
         component={({ match }: { match: any }) => (
           <TabsPanel>
-            <ProtectedRoute
-              path={`${match.path}/registers`}
-              component={RegistersEnvironment}
-            />
-            <ProtectedRoute
-              admin
-              path={`${match.path}/dashboard`}
-              component={DashboardEnvironment}
-            />
-            <ProtectedRoute
-              admin
-              path={`${match.path}/users`}
-              component={UsersEnvironment}
-            />
-            <Route path="*" component={NotFoundEnvironment} />
+            <Switch>
+              <ProtectedRoute
+                path={`${match.path}/registers`}
+                component={RegistersEnvironment}
+              />
+              <ProtectedRoute
+                admin
+                path={`${match.path}/dashboard`}
+                component={DashboardEnvironment}
+              />
+              <ProtectedRoute
+                admin
+                path={`${match.path}/users`}
+                component={UsersEnvironment}
+              />
+              <Route path="*" component={NotFoundEnvironment} />
+            </Switch>
           </TabsPanel>
         )}
       />
