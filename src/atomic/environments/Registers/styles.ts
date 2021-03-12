@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   date: {
     width: 200,
-    padding: theme.spacing(2, 0),
+    padding: theme.spacing(0, 0, 3, 0),
   },
   bottom: {
     display: 'grid',

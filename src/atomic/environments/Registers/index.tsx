@@ -7,6 +7,11 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  KeyboardDateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 import { gql, useMutation, useQuery } from '@apollo/client';
 
 import { Register } from '../../../@types/register';
@@ -51,7 +56,7 @@ const Registers: React.FC = () => {
   const { data } = useQuery(LIST_USER_REGISTERS);
   const [createRegister] = useMutation(CREATE_REGISTER);
 
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date());
   const [type, setType] = useState('in');
 
   useEffect(() => {
@@ -71,7 +76,7 @@ const Registers: React.FC = () => {
         console.log(error);
       });
 
-    setDate('');
+    setDate(new Date());
   };
 
   return (
@@ -92,13 +97,15 @@ const Registers: React.FC = () => {
               <h1 className={classes.userName}>Gilmar</h1>
 
               <div>Date & Hour</div>
-              <TextField
-                className={classes.date}
-                type="datetime-local"
-                color="secondary"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
-              />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDateTimePicker
+                  className={classes.date}
+                  variant="inline"
+                  color="secondary"
+                  value={date}
+                  onChange={(value) => setDate(value as Date)}
+                />
+              </MuiPickersUtilsProvider>
 
               <div>Type</div>
               <Select
@@ -116,7 +123,6 @@ const Registers: React.FC = () => {
               variant="contained"
               color="secondary"
               fullWidth
-              disabled={date.length === 0}
               onClick={() => handleSubmit()}
             >
               Register
